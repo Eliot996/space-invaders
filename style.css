@@ -1,5 +1,29 @@
 #grid {
-    height: 10px;
-    width: 10px;
-    background-color: aqua;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid 1px;
+    height: fit-content;
+    width: 90vh;
+}
+
+#grid div {
+    width: 6vh;
+    height: 6vh;
+}
+
+.shooter {
+    background-color: blue;
+}
+
+.invader {
+    background-color: purple;
+    border-radius: 3vh;
+}
+
+.boom {
+    background-color: red;
+}
+
+.laser {
+    background-color: orange;
 }

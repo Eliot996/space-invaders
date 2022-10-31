@@ -137,7 +137,7 @@ function shoot(e) {
         }
     }
 
-    if (e.keyCode === 32) laserId = setInterval(moveLaser, 100);
+    if (e.key === " ") laserId = setInterval(moveLaser, 100);
 }
 
 document.addEventListener("keyup", shoot)

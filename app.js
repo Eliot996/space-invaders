@@ -31,6 +31,7 @@ function drawInvaders() {
     alienInvaders.forEach(invaderIndex => {
         if (!alienInvadersTakenDown.includes(invaderIndex)){
             squares[invaderIndex + currentInvadersIndex].classList.add("invader");
+            squares[invaderIndex + currentInvadersIndex].innerHTML = " <img src=\"Alien.png\">"
         }
     });
 }
@@ -39,6 +40,7 @@ drawInvaders();
 function undrawInvaders() {
     alienInvaders.forEach(invaderIndex => {
         squares[invaderIndex + currentInvadersIndex].classList.remove("invader");
+        squares[invaderIndex + currentInvadersIndex].innerHTML = "";
     });
 }
 
@@ -86,9 +88,11 @@ let invaderId = setInterval(updateInvaders, 500)
 // draw the shooter
 
 squares[currentShooterIndex].classList.add("shooter");
+squares[currentShooterIndex].innerHTML = "<img src=\"defender.png\">"
 
 function moveShooter(e) {
     squares[currentShooterIndex].classList.remove("shooter");
+    squares[currentShooterIndex].innerHTML = " "
 
     switch(e.key) {
         case "ArrowLeft":
@@ -100,27 +104,34 @@ function moveShooter(e) {
     }
 
     squares[currentShooterIndex].classList.add("shooter");
+    squares[currentShooterIndex].innerHTML = "<img src=\"defender.png\">"
 }
 document.addEventListener("keydown", moveShooter);
 
 function shoot(e) {
     let laserId;
-    let currentLaserIndex = currentShooterIndex;
+    let currentLaserIndex = currentShooterIndex - 15;
 
     
     function moveLaser() {
         squares[currentLaserIndex].classList.remove("laser");
+        squares[currentLaserIndex].innerHTML = ""
         currentLaserIndex -= width;
         squares[currentLaserIndex].classList.add("laser");
+        squares[currentLaserIndex].innerHTML = "<img src=\"laser.png\">"
         
         // check for hit
         if (squares[currentLaserIndex].classList.contains("invader")) {
 
             squares[currentLaserIndex].classList.remove("laser");
             squares[currentLaserIndex].classList.remove("invader");
+            squares[currentLaserIndex].innerHTML = ""
             squares[currentLaserIndex].classList.add("boom");
             
-            setTimeout(() => squares[currentLaserIndex].classList.remove("boom"), 250);
+            setTimeout(() => {
+                squares[currentLaserIndex].classList.remove("boom");
+                squares[currentLaserIndex].innerHTML = "";
+            }, 250);
             clearInterval(laserId);
 
             const alienTakenDown = currentLaserIndex - currentInvadersIndex;
@@ -132,7 +143,10 @@ function shoot(e) {
         
         // check for out of bounce
         if (currentLaserIndex < width) {
-            setTimeout(() => squares[currentLaserIndex].classList.remove("laser"), 100);
+            setTimeout(() => () => {
+                squares[currentLaserIndex].classList.remove("laser");
+                squares[currentLaserIndex].innerHTML = ""
+            }, 100);
             clearInterval(laserId);
         }
     }

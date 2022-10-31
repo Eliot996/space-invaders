@@ -13,11 +13,19 @@
 
 .shooter {
     background-color: blue;
+    background: url(defender.png);
 }
 
 .invader {
     background-color: purple;
-    border-radius: 3vh;
+    background: url(Alien.png);
+    width: 6vh;
+    height: 6vh;
+}
+
+img{
+    width: 6vh;
+    height: 6vh;
 }
 
 .boom {
@@ -26,4 +34,5 @@
 
 .laser {
     background-color: orange;
+    background: url(laser.png);
 }
